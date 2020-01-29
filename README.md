@@ -17,6 +17,4 @@ This is the source code used for experiments for the research paper "<a href = "
 - __`dim_reduction_method`__ : Whether reducing dimensionality of 252-long vectors of daily returns of stocks with PCA or T-SNE or not (`PCA`, `tsne` or `none`)
 
 ## Datasets
-Datasets should be downloaded and preprocessed according to instructions in `0.preparing_data.ipynb`.
-
-The introduction page would be updated with more details in the foreseeabale future. (Last updated in Jan 10, 2020)
+Datasets should be downloaded and preprocessed according to instructions in `preparing_data.ipynb` in data folder.
