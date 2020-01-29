@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 import random
-random_seed = 314
-random.seed(random_seed)
-np.random.seed(random_seed)
+# random_seed = 314
+# random.seed(random_seed)
+# np.random.seed(random_seed)
 
 class ClustersUtils:
     @classmethod
