@@ -38,14 +38,17 @@ if __name__ == "__main__":
                                                                                                                       max_cluster_size = args.max_cluster_size,
                                                                                                                       scaling_method = args.scaling_method,
                                                                                                                       dim_reduction_method = args.dim_reduction_method)
-    print()
-    print("*** risk-adjusted return ***")
-    print(f"annualized sharpe_ratio : {perf.get_single_sharpe_ratio(portfolio_return) * np.sqrt(252):.4f}")
-    print(f"annualized sortino_ratio : {perf.get_single_sortino_ratio(portfolio_return)* np.sqrt(252):.4f}")
-    print("---------------------")
-    print("*** risk ***")
-    print(f"annualized stdev : {pd.Series(portfolio_return).std() * np.sqrt(252):.4f}")
-    print(f"annualized downside_stdev : {perf.get_single_downside_stdev(portfolio_return) * np.sqrt(252):.4f}")
-    print(f"CVaR_95 : {perf.get_cvar_95(portfolio_return) * 100:.2f}%")
-    print(f"Maximum DrawDown : {perf.get_maximum_drawdown(portfolio_return) * 100:.2f}%")
-    print()
+    # in-sample_std
+    print(f"annualized in-sample stdev : {in_sample_std.mean()*np.sqrt(252):.4f}")
+    # out-of-sample_std
+    print(f"annualized out-of-sample stdev : {out_of_sample_std.mean()*np.sqrt(252):.4f}")
+    print('------------------------------')
+    print(f"annualized_sharpe_ratio : {get_single_sharpe_ratio(portfolio_return)*np.sqrt(252):.4f}")
+    print(f"annualized_sortino_ratio : {get_single_sortino_ratio(portfolio_return)*np.sqrt(252):.4f}")
+    print('------------------------------')
+    # downside_std
+    print(f"annaulized downside_stdev : {get_single_downside_stdev(portfolio_return)*np.sqrt(252):.4f}")
+    # MDD
+    print(f"MDD : {get_maximum_drawdown(portfolio_return)*100:.2f}%")
+    # CVaR_95
+    print(f"CVaR_95 : {get_cvar_95(portfolio_return)*100:.2f}%")
