@@ -3,9 +3,9 @@
 This is the source code used for experiments for the research paper "<a href = "https://arxiv.org/abs/2001.02966">__Clustering Approaches for Global Minimum Variance Portfolio__"</a>
 
 ## Example
-```
-python3 main.py --data_period 'test' --max_cluster_size 75 --scaling_method 'none' --dim_reduction_method 'none'
-```
+
+> python3 main.py --data_period 'test' --max_cluster_size 75 --scaling_method 'none' --dim_reduction_method 'none'
+
 
 ## Parameters
 
