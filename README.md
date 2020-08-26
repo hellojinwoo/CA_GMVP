@@ -9,7 +9,7 @@ This is the source code used for experiments for the research paper "<a href = "
 
 ## Parameters
 
-- __`data_period`__: Daily returns of stocks from validation period or test period (`__validation__` or `__test__`)
+- __`data_period`__: Daily returns of stocks from validation period or test period (__`validation`__ or `__test__`)
   - We use validation period to choose the parameters which produces the best portfolio optimization performance.
   - Portfolio performance from test period is the true score of the proposed algorithm.
 - __`max_cluster_size`__: Maximum clustering size allowed for individual clusters (integer numbers)
