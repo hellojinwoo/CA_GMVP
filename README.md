@@ -1,6 +1,7 @@
 # Clustering Approaches for GMVP
 
-This is the source code used for experiments for the research paper "<a href = "https://arxiv.org/abs/2001.02966">__Clustering Approaches for Global Minimum Variance Portfolio__"</a>
+- This is the source code used for experiments for the research paper "<a href = "https://arxiv.org/abs/2001.02966">__Clustering Approaches for Global Minimum Variance Portfolio__"</a>
+- The academic paper utilizes 'constrained K-means clustering' to group stocks showing similar price movements before performing within group portfolio optimization. 
 
 ## Example
 ```
@@ -17,4 +18,4 @@ python3 main.py --data_period 'test' --max_cluster_size 75 --scaling_method 'non
 - __`dim_reduction_method`__ : Whether reducing dimensionality of 252-long vectors of daily returns of stocks with PCA or T-SNE or not (__`PCA`__, __`tsne`__ or __`none`__)
 
 ## Datasets
-Datasets should be downloaded and preprocessed in accordance with instructions in `0. preparing_data.ipynb`, located in data folder.
+- Datasets should be downloaded and preprocessed in accordance with instructions in `0. preparing_data.ipynb`, located in data folder.
