@@ -17,7 +17,7 @@ python main.py --data_period test --max_cluster_size 75 --scaling_method none --
 python main.py --data_period test --max_cluster_size 75 --scaling_method standard_scale --dim_reduction_method tsne_components 10
 ```
 
-## Parameters
+## Hyper-Parameters
 
 1. __`data_period`__: Daily returns of stocks from validation period or test period (__validation__ or __test__)
     - We use validation period to choose the parameters which produces the best portfolio optimization performance.
