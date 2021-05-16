@@ -2,8 +2,6 @@ from . import prepare_data
 from . import bounded_Kmeans_clustering as bounded
 
 import numpy as np
-from tqdm import tqdm
-# import numpy.random as random
 import pandas as pd
 
 # libraries for Bounded K-means clustering
@@ -27,18 +25,20 @@ import matplotlib.pyplot as plt
 # libraries for using PCA
 from sklearn.decomposition import PCA
 
-# libraries for using t-sne on GPU : https://github.com/rapidsai/cuml
-import cudf
-from cuml.manifold import TSNE
+# libraries for using t-sne
+from sklearn.manifold import TSNE
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
 def GMVP_within_cluster(data_period, index, stock_list_of_cluster):
     
+    file_path = './data/russel1000_daily_price_df.pickle'
+    daily_return_df_list_val, daily_return_df_list_test, daily_price_df, all_ticker_list = prepare_data.split_dataset(file_path)
+    
     if data_period == 'validation':
-        daily_return_df_list = prepare_data.daily_return_df_list_val
+        daily_return_df_list = daily_return_df_list_val
     elif data_period == 'test':
-        daily_return_df_list = prepare_data.daily_return_df_list_test
+        daily_return_df_list = daily_return_df_list_test
     
     # slice the data needed
     daily_stock_return_of_cluster_df = daily_return_df_list[index].loc[:, stock_list_of_cluster]
@@ -61,8 +61,10 @@ def GMVP_within_cluster(data_period, index, stock_list_of_cluster):
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
 
-def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', dim_reduction_method='none', no_of_PCA_components = 0, no_of_tsne_components = 0):
+def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', dim_reduction_method='none', no_of_PCA_components = 3, no_of_tsne_components = 3):
     rebalancing_period = 60
+    
+    print(f"data_period: {data_period}")
     
     ################## creating lists and dictionaries for storing outcomes ##################
     # 1) returns
@@ -78,12 +80,16 @@ def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', 
                                        # 5. daily_return_for_viz 
     ##########################################################################################
     
-    if data_period == 'validation':
-        daily_return_df_list = prepare_data.daily_return_df_list_val
-    elif data_period == 'test':
-        daily_return_df_list = prepare_data.daily_return_df_list_test
     
-    for index_no, daily_return_df in enumerate(tqdm(daily_return_df_list)):
+    file_path = './data/russel1000_daily_price_df.pickle'
+    daily_return_df_list_val, daily_return_df_list_test, daily_price_df, all_ticker_list = prepare_data.split_dataset(file_path)
+    
+    if data_period == 'validation':
+        daily_return_df_list = daily_return_df_list_val
+    elif data_period == 'test':
+        daily_return_df_list = daily_return_df_list_test
+    for index_no, daily_return_df in enumerate(daily_return_df_list):
+        print(f"code working: {index_no}/{len(daily_return_df_list)} done")
         
         cluster_weight_dict = {}   # weights of each 11 cluster
         cluster_ticker_dict = {}   # tickers belonging to each cluster 
@@ -94,6 +100,7 @@ def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', 
             scaled_daily_price_array = (standard_scaler.fit_transform(daily_return_df))
             after_scaling_return_df = pd.DataFrame(scaled_daily_price_array, columns = all_ticker_list).T
         elif scaling_method == 'none':
+            print("scaling_method = none!!")
             after_scaling_return_df = daily_return_df.T
         
         ################## 2. dimensionality reduction ##################
@@ -122,7 +129,7 @@ def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', 
         
         for cluster_label in range(n_clusters):
             ticker_index_list =  best_clusters[cluster_label]
-            cluster_ticker_list = list(np.array(prepare_data.all_ticker_list)[ticker_index_list])
+            cluster_ticker_list = list(np.array(all_ticker_list)[ticker_index_list])
             after_dim_reduction_return_df.loc[cluster_ticker_list,'cluster_label'] = cluster_label
             
         # storing clustering results in a dict : cluster_ticker_dict
@@ -133,7 +140,7 @@ def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', 
         ################## (Optional) For visualization ##################
         pca = PCA(n_components=2)
         daily_return_array_for_viz = pca.fit_transform(after_dim_reduction_return_df.iloc[:,:-1])
-        daily_return_df_for_viz = pd.DataFrame(daily_return_array_for_viz, index = prepare_data.all_ticker_list)  # shape : [stocks * PCs]
+        daily_return_df_for_viz = pd.DataFrame(daily_return_array_for_viz, index = all_ticker_list)  # shape : [stocks * PCs]
         daily_return_df_for_viz.loc[: ,'cluster_label'] = after_dim_reduction_return_df.loc[:,'cluster_label']
         daily_return_df_for_viz.rename(columns = {0: 'PC_1',1:'PC_2'}, inplace=True)
         
