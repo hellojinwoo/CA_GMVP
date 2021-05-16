@@ -64,8 +64,6 @@ def GMVP_within_cluster(data_period, index, stock_list_of_cluster):
 def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', dim_reduction_method='none', no_of_PCA_components = 3, no_of_tsne_components = 3):
     rebalancing_period = 60
     
-    print(f"data_period: {data_period}")
-    
     ################## creating lists and dictionaries for storing outcomes ##################
     # 1) returns
     daily_portfolio_return_list = []   # daily returns of portfolio
@@ -100,7 +98,6 @@ def GMVP_between_clusters(data_period, max_cluster_size, scaling_method='none', 
             scaled_daily_price_array = (standard_scaler.fit_transform(daily_return_df))
             after_scaling_return_df = pd.DataFrame(scaled_daily_price_array, columns = all_ticker_list).T
         elif scaling_method == 'none':
-            print("scaling_method = none!!")
             after_scaling_return_df = daily_return_df.T
         
         ################## 2. dimensionality reduction ##################
