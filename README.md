@@ -14,7 +14,7 @@ python main.py --data_period test --max_cluster_size 75 --scaling_method none --
 ```
 - Using t-sne with standard scaling and t-sne components = 10
 ```
-python main.py --data_period test --max_cluster_size 75 --scaling_method standard_scale --dim_reduction_method tsne_components 10
+python main.py --data_period test --max_cluster_size 75 --scaling_method standard_scale --dim_reduction_method tsne --tsne_components 10
 ```
 
 ## Hyper-Parameters
