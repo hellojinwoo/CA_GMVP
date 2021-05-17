@@ -5,6 +5,7 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/34431729/118437017-1ff5d200-b6e2-11eb-848d-a7f99d0e0019.png" width="800">
 </p>
+
 ## Example
 - Using raw data without scaling methods and dimensional reduction methods
 ```
