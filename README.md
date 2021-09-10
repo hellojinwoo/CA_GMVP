@@ -36,6 +36,5 @@ python main.py --data_period test --max_cluster_size 75 --scaling_method standar
 
 ## Updates as of May 16th, 2021
 1. Codes are fixed and improved to prevent errors. (For example, global variables are not used anymore.)
-2. More examples are provided to let users know how to use codes more thoroughly.
-3. Number of `PCA_components` and `tsne_components` can be provided using argparse, which makes it easier to use codes.
-4. The library `cudf`is now replaced with `sklearn`, due to more ease of use. 
+2. Number of `PCA_components` and `tsne_components` can be provided using argparse, which makes it easier to use dimensionality reduction methods.
+3. The library `cudf` is now replaced with `sklearn`, due to more ease of use. 
