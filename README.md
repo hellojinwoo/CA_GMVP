@@ -11,7 +11,7 @@
 ```
 python main.py --data_period test --max_cluster_size 75 --scaling_method none --dim_reduction_method none
 ```
-- Using PCA without scaling methods (If `no_of_PCA_components` is not specfied, the default number 3 is used) 
+- Using PCA without scaling methods (If `PCA_components` is not specfied, the default number 3 is used) 
 ```
 python main.py --data_period test --max_cluster_size 75 --scaling_method none --dim_reduction_method PCA
 ```
