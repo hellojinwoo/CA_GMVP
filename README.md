@@ -1,7 +1,7 @@
 # Clustering Approaches for Global Mininum Variance Portfolio
 
 - This is the source code used for experiments for the research paper "<a href = "https://arxiv.org/abs/2001.02966">__Clustering Approaches for Global Minimum Variance Portfolio__"</a>
-- The academic paper utilizes 'constrained K-means clustering' to group stocks showing similar price movements before performing 'within group portfolio optimization'. 
+- The academic paper utilizes 'constrained K-means clustering' to group stocks showing similar price movements before performing 'within cluster portfolio optimization'. 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/34431729/118437017-1ff5d200-b6e2-11eb-848d-a7f99d0e0019.png" width="800">
 </p>
